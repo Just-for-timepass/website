@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Welcome</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+
+            background-image: url("background.png");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+
+            font-family: Segoe UI, sans-serif;
+            overflow: hidden;
+
+            position: relative;
+        }
+
+        /* Dark overlay */
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.60);
+            z-index: 0;
+        }
+
+
+        /* ============================= */
+        /* PAGE SYSTEM */
+        /* ============================= */
+
+        .page {
+
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            position: absolute;
+            inset: 0;
+
+            padding: 20px;
+
+            transition: opacity 0.6s ease, transform 0.6s ease;
+
+            /* ADDED */
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .page.hidden {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(60px);
+        }
+
+        .page.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(0);
+        }
+
+
+        /* ============================= */
+        /* MAIN BOX */
+        /* ============================= */
+
+        .container {
+
+            position: relative;
+            z-index: 2;
+
+            width: 90%;
+            max-width: 950px;
+
+            text-align: center;
+
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+
+            padding: 40px;
+
+            border-radius: 25px;
+
+            color: white;
+
+            box-shadow:
+                0 0 30px rgba(255, 255, 255, 0.1);
+
+            /* ADDED */
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+
+        /* ============================= */
+        /* HEADINGS */
+        /* ============================= */
+
+        h1 {
+
+            font-size: 48px;
+
+            font-family: "Times New Roman", Times, serif;
+
+            font-weight: bold;
+
+            letter-spacing: 1px;
+
+            color: white;
+
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+
+
+        /* ============================= */
+        /* TEXT */
+        /* ============================= */
+
+        .line {
+
+            font-size: 22px;
+
+            line-height: 1.8;
+
+            margin-bottom: 15px;
+        }
+
+
+        /* ============================= */
+        /* WARNING BOX */
+        /* ============================= */
+
+        .warning-box {
+
+            margin-top: 25px;
+
+            border: 2px solid red;
+
+            border-radius: 15px;
+
+            padding: 20px;
+
+            background: rgba(255, 0, 0, 0.12);
+        }
+
+        .warning-title {
+
+            color: red;
+
+            font-size: 36px;
+
+            font-family: Impact, Haettenschweiler, sans-serif;
+
+            margin-bottom: 10px;
+
+            text-shadow: 0 0 10px red;
+        }
+
+        .warning-text {
+
+            font-size: 20px;
+
+            line-height: 1.8;
+        }
+
+
+        /* ============================= */
+        /* PAGE 2 SPECIAL TEXT */
+        /* ============================= */
+
+        .page2-text {
+
+            font-size: 28px;
+
+            font-family: "Times New Roman", Times, serif;
+
+            font-weight: bold;
+
+            line-height: 1.8;
+
+            margin-bottom: 18px;
+
+            color: white;
+
+            text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+        }
+
+        .page2-subtext {
+
+            font-size: 24px;
+
+            line-height: 1.8;
+
+            margin-bottom: 15px;
+        }
+
+
+        /* ============================= */
+        /* BUTTON */
+        /* ============================= */
+
+        .next-btn {
+
+            display: inline-block;
+
+            margin-top: 30px;
+
+            padding: 15px 45px;
+
+            text-decoration: none;
+
+            color: white;
+
+            font-size: 22px;
+
+            font-weight: bold;
+
+            background: #0066ff;
+
+            border: none;
+
+            border-radius: 50px;
+
+            cursor: pointer;
+
+            transition: .4s;
+        }
+
+        .next-btn:hover {
+
+            transform: scale(1.08);
+
+            background: #004ecc;
+        }
+
+
+        /* ============================= */
+        /* PAGE 3 */
+        /* ============================= */
+
+        .page3-text {
+
+            font-size: 28px;
+
+            font-family: "Times New Roman", Times, serif;
+
+            font-weight: bold;
+
+            line-height: 1.8;
+
+            margin-bottom: 18px;
+
+            color: white;
+
+            text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+        }
+
+
+        /* ============================= */
+        /* MOBILE */
+        /* ============================= */
+
+        @media(max-width:768px) {
+
+    .page {
+        min-height: 100dvh;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        padding: 15px;
+
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .container {
+        margin: auto;
+        width: 90%;
+        padding: 25px;
+    }
+
+    h1 {
+        font-size: 40px;
+    }
+
+    .line {
+        font-size: 18px;
+    }
+
+    .warning-title {
+        font-size: 28px;
+    }
+
+    .warning-text {
+        font-size: 16px;
+    }
+
+    .page2-text {
+        font-size: 22px;
+    }
+
+    .page2-subtext {
+        font-size: 18px;
+    }
+
+    .page3-text {
+        font-size: 22px;
+    }
+
+    .next-btn {
+        width: 100%;
+        font-size: 18px;
+    }
+}
+
+                /*
+                Keeps the button safely inside
+                the container.
+                */
+                margin-bottom: 5px;
+            }
+
+            .container {
+                padding: 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ============================= -->
+    <!-- PAGE 1 -->
+    <!-- ============================= -->
+
+    <section id="page1" class="page active">
+
+        <div class="container">
+
+            <h1>Hasan Welcomes You ✨</h1>
+
+            <br>
+            <br>
+
+            <p class="line">
+                Hasan welcomes you for visiting this page.
+            </p>
+
+            <br>
+
+            <p class="line">
+                Explore each and every page with high energy, because every page is going to open new stories.
+            </p>
+
+            <br>
+
+            <p class="line">
+                Hasan again welcomes you in this sphere.
+            </p>
+
+
+            <div class="warning-box">
+
+                <div class="warning-title">
+                    ⚠ WARNING !!!
+                </div>
+
+                <div class="warning-text">
+
+                    You've just stepped into a place where imagination tries to meet innovation.
+
+                    <br>
+                    <br>
+
+                    Also, I would request not to take any content personally.
+                    Everything here is created only for entertainment and creative expression.
+
+                </div>
+
+            </div>
+
+
+            <button class="next-btn" onclick="showPage(2)">
+                Move Next →
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ============================= -->
+    <!-- PAGE 2 -->
+    <!-- ============================= -->
+
+    <section id="page2" class="page hidden">
+
+        <div class="container">
+
+            <p class="page2-text">
+                Making someone's day great and filled with joy &amp; laughter is not bad.
+            </p>
+
+            <p class="page2-subtext">
+                But I don't know how to do it !!!
+            </p>
+
+            <p class="page2-subtext">
+                So, I want to make it crazy !!! 😎
+            </p>
+
+
+            <button class="next-btn" onclick="showPage(3)">
+                Move Next →
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ============================= -->
+    <!-- PAGE 3 -->
+    <!-- ============================= -->
+
+    <section id="page3" class="page hidden">
+
+        <div class="container">
+
+            <h1>
+                Like, Follow &amp; Subscribe ❤️
+            </h1>
+
+            <br>
+            <br>
+
+            <p class="page3-text">
+                If you enjoyed this journey,
+            </p>
+
+            <p class="page3-text">
+                don't forget to Like, Follow &amp; Subscribe!
+            </p>
+
+            <button class="next-btn" onclick="showPage(4)">
+                Move Next →
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ============================= -->
+    <!-- PAGE 4 -->
+    <!-- ============================= -->
+
+    <section id="page4" class="page hidden">
+
+        <div class="container">
+
+            <h1>Do You Like It? ❤️</h1>
+
+            <br>
+            <br>
+
+            <p class="line">
+                So... what do you think?
+            </p>
+
+            <button class="next-btn" onclick="showPage(5)">
+                Move Next →
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ============================= -->
+    <!-- PAGE 5 -->
+    <!-- ============================= -->
+
+
+    <script>
+
+        function showPage(pageNumber) {
+
+            /* Hide all pages */
+
+            document.getElementById("page1").classList.remove("active");
+            document.getElementById("page1").classList.add("hidden");
+
+            document.getElementById("page2").classList.remove("active");
+            document.getElementById("page2").classList.add("hidden");
+
+            document.getElementById("page3").classList.remove("active");
+            document.getElementById("page3").classList.add("hidden");
+
+            document.getElementById("page4").classList.remove("active");
+            document.getElementById("page4").classList.add("hidden");
+
+
+            /* Show selected page */
+
+            document.getElementById("page" + pageNumber).classList.remove("hidden");
+            document.getElementById("page" + pageNumber).classList.add("active");
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>
