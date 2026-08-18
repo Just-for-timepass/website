@@ -60,7 +60,7 @@
 
             transition: opacity 0.6s ease, transform 0.6s ease;
 
-            /* ADDED */
+            /* ONLY ADDED FOR LARGE PAGES */
             overflow-y: auto;
             overflow-x: hidden;
         }
@@ -103,10 +103,6 @@
 
             box-shadow:
                 0 0 30px rgba(255, 255, 255, 0.1);
-
-            /* ADDED */
-            margin-top: auto;
-            margin-bottom: auto;
         }
 
 
@@ -280,68 +276,54 @@
 
         @media(max-width:768px) {
 
-    .page {
-        min-height: 100dvh;
+            h1 {
+                font-size: 40px;
+            }
 
-        display: flex;
-        justify-content: center;
-        align-items: center;
+            .line {
+                font-size: 18px;
+            }
 
-        padding: 15px;
+            .warning-title {
+                font-size: 28px;
+            }
 
-        overflow-y: auto;
-        overflow-x: hidden;
-    }
+            .warning-text {
+                font-size: 16px;
+            }
 
-    .container {
-        margin: auto;
-        width: 90%;
-        padding: 25px;
-    }
+            .page2-text {
+                font-size: 22px;
+            }
 
-    h1 {
-        font-size: 40px;
-    }
+            .page2-subtext {
+                font-size: 18px;
+            }
 
-    .line {
-        font-size: 18px;
-    }
+            .page3-text {
+                font-size: 22px;
+            }
 
-    .warning-title {
-        font-size: 28px;
-    }
-
-    .warning-text {
-        font-size: 16px;
-    }
-
-    .page2-text {
-        font-size: 22px;
-    }
-
-    .page2-subtext {
-        font-size: 18px;
-    }
-
-    .page3-text {
-        font-size: 22px;
-    }
-
-    .next-btn {
-        width: 100%;
-        font-size: 18px;
-    }
-}
-
-                /*
-                Keeps the button safely inside
-                the container.
-                */
-                margin-bottom: 5px;
+            .next-btn {
+                width: 100%;
+                font-size: 18px;
             }
 
             .container {
                 padding: 25px;
+            }
+
+            /*
+            ONLY MOBILE POSITIONING CHANGE
+
+            Small pages remain centered.
+            Large pages can scroll when necessary.
+            */
+
+            .page {
+                min-height: 100dvh;
+                overflow-y: auto;
+                overflow-x: hidden;
             }
 
         }
