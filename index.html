@@ -60,9 +60,16 @@
 
             transition: opacity 0.6s ease, transform 0.6s ease;
 
-            /* ONLY ADDED FOR LARGE PAGES */
+            /* IMPORTANT: no scrolling by default */
+            overflow: hidden;
+        }
+
+        /* Scrolling is enabled ONLY for large pages */
+
+        .page.scrollable {
             overflow-y: auto;
             overflow-x: hidden;
+            align-items: flex-start;
         }
 
         .page.hidden {
@@ -313,19 +320,6 @@
                 padding: 25px;
             }
 
-            /*
-            ONLY MOBILE POSITIONING CHANGE
-
-            Small pages remain centered.
-            Large pages can scroll when necessary.
-            */
-
-            .page {
-                min-height: 100dvh;
-                overflow-y: auto;
-                overflow-x: hidden;
-            }
-
         }
 
     </style>
@@ -495,6 +489,43 @@
 
     <script>
 
+        /*
+        ==========================================
+        AUTOMATIC SCROLL DETECTION
+        ==========================================
+
+        If the content is small:
+        → Page remains perfectly centered
+        → No scrolling
+
+        If the content is too large:
+        → Scrolling automatically turns ON
+        → User can scroll to the bottom
+        */
+
+        function checkPageSize(page) {
+
+            page.classList.remove("scrollable");
+
+            /*
+            First check whether the content fits
+            inside the available screen.
+            */
+
+            if (page.scrollHeight > page.clientHeight) {
+
+                page.classList.add("scrollable");
+
+            }
+        }
+
+
+        /*
+        ==========================================
+        SHOW PAGE
+        ==========================================
+        */
+
         function showPage(pageNumber) {
 
             /* Hide all pages */
@@ -514,10 +545,54 @@
 
             /* Show selected page */
 
-            document.getElementById("page" + pageNumber).classList.remove("hidden");
-            document.getElementById("page" + pageNumber).classList.add("active");
+            const selectedPage = document.getElementById("page" + pageNumber);
+
+            selectedPage.classList.remove("hidden");
+            selectedPage.classList.add("active");
+
+
+            /*
+            Wait until the browser has displayed
+            the page, then check its size.
+            */
+
+            setTimeout(function () {
+                checkPageSize(selectedPage);
+            }, 50);
 
         }
+
+
+        /*
+        ==========================================
+        CHECK FIRST PAGE
+        ==========================================
+        */
+
+        window.addEventListener("load", function () {
+
+            const firstPage = document.getElementById("page1");
+
+            checkPageSize(firstPage);
+
+        });
+
+
+        /*
+        ==========================================
+        RECHECK WHEN SCREEN SIZE CHANGES
+        ==========================================
+        */
+
+        window.addEventListener("resize", function () {
+
+            const activePage = document.querySelector(".page.active");
+
+            if (activePage) {
+                checkPageSize(activePage);
+            }
+
+        });
 
     </script>
 
